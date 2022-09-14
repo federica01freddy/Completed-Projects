@@ -1,0 +1,68 @@
+version: "2.0"
+stories:
+- story: Happy path
+  steps:
+  - user: |
+      ciao
+    intent: greet
+  - action: utter_greet
+  - user: |
+      sto cercando un ristorante
+    intent: request_restaurant
+  - action: restaurant_form
+  - active_loop: restaurant_form
+  - active_loop: null
+  - action: utter_submit
+  - action: utter_slots_values
+  - user: |
+      grazie
+    intent: thankyou
+  - action: utter_noworries
+
+- story: Happy path with message providing requested value
+  steps:
+  - user: |
+      ciao
+    intent: greet
+  - action: utter_greet
+  - user: |
+      vorrei prenotare un ristorante
+    intent: request_restaurant
+  - action: restaurant_form
+  - active_loop: restaurant_form
+  - user: |
+      cibo [inglese](cuisine)
+    intent: inform
+  - action: restaurant_form
+  - active_loop: null
+  - action: utter_submit
+  - action: utter_slots_values
+  - user: |
+      grazie
+    intent: thankyou
+  - action: utter_noworries
+
+
+- story: unhappy path
+  steps:
+  - user: |
+      ciao
+    intent: greet
+  - action: utter_greet
+  - user: |
+      sto cercando un ristorante
+    intent: request_restaurant
+  - action: restaurant_form
+  - active_loop: restaurant_form
+  - user: |
+      chi ti ha inventato?
+    intent: chitchat
+  - action: utter_chitchat
+  - action: restaurant_form
+  - active_loop: null
+  - action: utter_submit
+  - action: utter_slots_values
+  - user: |
+      grazie
+    intent: thankyou
+  - action: utter_noworries

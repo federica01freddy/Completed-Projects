@@ -1,0 +1,142 @@
+version: "2.0"
+intents:
+  - request_hotel:
+      use_entities: []
+  - chitchat:
+      use_entities: []
+  - inform
+  - affirm
+  - deny
+  - stop
+  - thankyou
+  - greet
+  - bot_challenge
+
+entities:
+  - city
+  - number
+  - feedback
+  - aereoporto
+  - room
+
+slots:
+  city:
+    type: text
+    influence_conversation: false
+    auto_fill: false
+  num_people:
+    type: float
+    influence_conversation: false
+    auto_fill: false
+  room:
+    type: text
+    influence_conversation: false
+    auto_fill: false
+  smoke:
+    type: text
+    influence_conversation: false
+    auto_fill: false
+  feedback:
+    type: text
+    influence_conversation: false
+    auto_fill: false
+  aereoporto:
+    type: text
+    influence_conversation: false
+    auto_fill: false
+  requested_slot:
+    type: text
+    influence_conversation: false
+
+responses:
+  utter_ask_city:
+    - text: "In che città?"
+  utter_ask_num_people:
+    - text: "Quante persone siete?"
+  utter_ask_room:
+    - text: "Volete una suite?"
+  utter_ask_smoke:
+    - text: "Volete una stanza per fumatori?"
+  utter_ask_feedback:
+    - text: "Potresti darmi un giudizio sull'esperienza finora?"
+  utter_submit:
+  - text: "OK, siamo pronti!"
+  utter_slots_values:
+    - text: "I parametri richiesti erano: \n
+             - città: {city}\n
+             - numero di persone: {num_people}\n
+             - suite: {room}\n
+             - stanza per fumatori: {smoke}\n
+             - feedback: {feedback}\n
+             - aereoporto: {aereoporto}"
+  utter_noworries:
+    - text: "Di niente :)"
+  utter_chitchat:
+    - text: "Chiacchiere!!!"
+  utter_ask_continue:
+    - text: "Vuoi continuare?"
+  utter_wrong_city:
+    - text: "Non lavoriamo in questa città"
+  utter_wrong_smoke:
+    - text: "Non puoi portarlo, mi dispiace"
+  utter_wrong_num_people:
+    - text: "Inserisci un valore corretto"
+  utter_wrong_room:
+    - text: "Inserisci un valore corretto"
+  utter_default:
+    - text: "Scusa, non ti ho capito, prova a riformulare la frase."
+  utter_greet:
+    - text: "Ciao! Sono un assistente di ricerca per hotel. In cosa posso aiutarti?"
+  utter_iamabot:
+    - text: "Sono un robot, creato con Rasa da Matteo e Federica."
+  utter_restart:
+    - text: "Riavviato"
+  utter_ask_aereoporto:
+    - text: "Volete che vi aspettiamo in areoporto?"
+
+actions:
+- validate_hotel_form
+
+forms:
+  hotel_form:
+    city:
+    - type: from_entity
+      entity: city
+      not_intent: chitchat
+    num_people:
+    - type: from_entity
+      entity: number
+      intent: inform
+    room:
+    - type: from_entity
+      entity: room
+    - type: from_intent
+      intent: affirm
+      value: true
+    - type: from_intent
+      intent: deny
+      value: false
+    smoke:
+    - type: from_intent
+      intent: deny
+      value: false
+    - type: from_intent
+      intent: affirm
+      value: true
+    feedback:
+    - type: from_entity
+      entity: feedback
+    - type: from_text
+    aereoporto:
+    - type: from_entity
+      entity: aereoporto
+    - type: from_intent
+      intent: affirm
+      value: true
+    - type: from_intent
+      intent: deny
+      value: false
+
+session_config:
+  session_expiration_time: 60  # value in minutes
+  carry_over_slots_to_new_session: true

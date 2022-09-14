@@ -1,0 +1,32 @@
+{
+  "action_fingerprints": {
+    "hotel_form": {
+      "active_loop": [
+        "should_not_be_set",
+        "hotel_form",
+        null
+      ]
+    },
+    "action_deactivate_loop": {
+      "active_loop": [
+        null
+      ]
+    }
+  },
+  "python": "3.8.5",
+  "max_histories": [
+    null,
+    5,
+    null
+  ],
+  "ensemble_name": "rasa.core.policies.ensemble.SimplePolicyEnsemble",
+  "policy_names": [
+    "rasa.core.policies.ted_policy.TEDPolicy",
+    "rasa.core.policies.memoization.AugmentedMemoizationPolicy",
+    "rasa.core.policies.rule_policy.RulePolicy"
+  ],
+  "trained_at": "20210121-183222",
+  "rasa": "2.2.5",
+  "tensorflow": "2.3.2",
+  "sklearn": "0.23.2"
+}

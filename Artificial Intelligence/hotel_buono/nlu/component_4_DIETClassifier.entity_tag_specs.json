@@ -1,0 +1,36 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-city",
+      "2": "I-city",
+      "3": "L-city",
+      "4": "U-city",
+      "5": "B-feedback",
+      "6": "I-feedback",
+      "7": "L-feedback",
+      "8": "U-feedback",
+      "9": "B-room",
+      "10": "I-room",
+      "11": "L-room",
+      "12": "U-room",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-city": 1,
+      "I-city": 2,
+      "L-city": 3,
+      "U-city": 4,
+      "B-feedback": 5,
+      "I-feedback": 6,
+      "L-feedback": 7,
+      "U-feedback": 8,
+      "B-room": 9,
+      "I-room": 10,
+      "L-room": 11,
+      "U-room": 12,
+      "O": 0
+    },
+    "num_tags": 13
+  }
+]

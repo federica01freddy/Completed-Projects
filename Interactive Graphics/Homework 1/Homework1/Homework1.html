@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<canvas id="gl-canvas" width="512" height="512"></canvas>
+<div>
+	<button id = "ButtonX">Rotate X</button>
+	<button id = "ButtonY">Rotate Y</button>
+	<button id = "ButtonZ">Rotate Z</button>
+	<button id = "ButtonT">Start/Stop Rotation</button>
+	<button id = "ButtonD">Change direction</button>
+</div>
+<br>
+
+<div>
+	<button id = "ButtonS">Switch on per-fragment shading</button>
+	<button id = "ButtonN">Turn on neon light</button>
+	<button id = "ButtonTex">Activate texture</button>
+</div>
+<br>
+
+<div>
+	 <b> Radius </b> 1.0<input id="radiusSlider" type="range" min="1.0" max="4.0" step="0.2" value="2.5" />4.0
+	 <b> Theta </b> -180<input id="thetaSlider" type="range" min="-180" max="180" step="5" value="0" />180
+	 <b> Phi </b> -180<input id="phiSlider" type="range" min="-180" max="180" step="5" value="0.2" />180
+</div>
+<div>
+	 <b> z Near </b> 0.0<input id="zNearSlider" type="range" min="0.0" max="1.2" step="0.3" value="0.3" />1.2
+	 <b> z Far </b> 1.0<input id="zFarSlider" type="range" min="1.0" max="3.0" step="1.0" value="3.0" />3.0
+	 <b> Fovy </b> 10<input id="fovSlider" type="range" min="10" max="40" step="5" value="45" />40
+	 <b> Aspect </b> 0.5<input id="aspectSlider" type="range" min="0.5" max="2" step="0.1" value="1" />2
+</div>
+<br>
+
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+#version 300 es
+precision mediump float;
+//***************************************	INPUT
+in vec4 aPosition;
+in vec3 aNormal;
+in vec2 aTextCoord;
+
+//***************************************	LIGHTS + MATERIAL
+uniform vec4 uEmission;
+uniform vec4 uAmbientProductNeon, uDiffuseProductNeon, uSpecularProductNeon;
+uniform vec4 uNeonPosition1, uNeonPosition2, uNeonPosition3;
+uniform float uShininess; 
+
+//***************************************	MATRICES
+uniform mat4 uRotationalMatrix;
+uniform mat4 uModelViewMatrixCyl;
+uniform mat4 uModelViewMatrix;
+uniform mat4 uProjectionMatrix;
+
+//***************************************	BUMP MAPPING
+uniform vec4 uNormal;
+uniform mat3 uNormalMatrix;
+uniform vec3 uObjTangent; /* tangent vector in object coordinates */
+
+//***************************************	OUTPUT
+out vec3 Ltex;
+out vec3 Vtex;
+out vec4 vColor;
+out vec2 vTextCoord;
+out vec3 vN, vE;
+out vec3 vLneon1, vLneon2, vLneon3;
+
+//***************************************	FLAGS
+uniform bool uFflag;	// TO SWITCH BETWEEN SHADING MODELS
+uniform bool uNflag;	// TO TURN THE LIGHT OF THE CYLINDRICAL NEON
+uniform bool uTflag;	// TO ACTIVATE/DEACTIVATE TEXTURE
+uniform bool uCflag; 	// TO WORK WITH THE CYLINDER WHICH HAS EMISSIVE PROPERTY
+
+void main()
+{	
+	vec3 pos;
+	if(uCflag) pos = (aPosition).xyz;				// cylinder doesn't rotate so its position if fixed
+	else pos = (uRotationalMatrix*aPosition).xyz;	// object postion varies with the rotation
+	
+	vec3 E = normalize( -pos );
+	
+	// NEON CYLINDRICAL LIGHT -> THREE POINT LIGHTS
+	vec3 Lneon1, Lneon2, Lneon3;
+	vec3 neon1 = (uNeonPosition1).xyz;
+	vec3 neon2 = (uNeonPosition2).xyz;
+	vec3 neon3 = (uNeonPosition3).xyz;
+	Lneon1 = normalize ( neon1 - pos );
+	Lneon2 = normalize ( neon2 - pos );
+	Lneon3 = normalize ( neon3 - pos );
+	
+	vec4 NN = vec4(aNormal,0);
+	vec3 N;
+	if(uCflag) N = normalize((aPosition*NN).xyz);
+	else N = normalize(uNormalMatrix*NN.xyz);
+
+	if(!uFflag){	// per-vertex shading
+		if(uNflag){
+			if(uCflag){			//in case of the cylinder it is not affected from the light because it's the cylinder the light source: only emission term.
+				vColor = uEmission; 
+			}
+			else{				//computing the object color with the turned on neon su using the values of the three lights
+				vec3 H1 = normalize( Lneon1 + E );
+				vec3 H2 = normalize( Lneon2 + E );
+				vec3 H3 = normalize( Lneon3 + E );
+				vec4 ambientNeon = uAmbientProductNeon;
+				float Kd1 = max( dot(Lneon1, N), 0.0 );
+				float Kd2 = max( dot(Lneon2, N), 0.0 );
+				float Kd3 = max( dot(Lneon3, N), 0.0 );
+				vec4 diffuseNeon = Kd1*uDiffuseProductNeon + Kd2*uDiffuseProductNeon + Kd3*uDiffuseProductNeon;
+				float Ks1 = pow( max(dot(N, H1), 0.0), uShininess );
+				float Ks2 = pow( max(dot(N, H2), 0.0), uShininess );
+				float Ks3 = pow( max(dot(N, H3), 0.0), uShininess );
+				vec4 specular1 = Ks1*uSpecularProductNeon;
+				if( dot(Lneon1, N) < 0.0 ) specular1 = vec4(0.0, 0.0, 0.0, 1.0);
+				vec4 specular2 = Ks2*uSpecularProductNeon;
+				if( dot(Lneon2, N) < 0.0 ) specular2 = vec4(0.0, 0.0, 0.0, 1.0);
+				vec4 specular3 = Ks3*uSpecularProductNeon;
+				if( dot(Lneon3, N) < 0.0 ) specular3 = vec4(0.0, 0.0, 0.0, 1.0);
+				vec4 specularNeon = specular1 + specular2 + specular3;
+				vColor = ambientNeon + diffuseNeon + specularNeon;
+			}
+		}
+		else{	
+			// I don't make any computation because neon is turned off so everything is black
+		}
+	}
+	else{		//per-fragment shading
+		vE = -pos;
+		vN = N;
+		if(uNflag){
+			if(uCflag){
+				// I don't make any computation in the case of the cylinder because it is only computing its color
+				// but here we are in the case of per-fragment shading so the color it's computed in fragment shader
+			}
+			else{
+				vLneon1 = Lneon1;
+				vLneon2 = Lneon2;
+				vLneon3 = Lneon3;
+				if(uTflag){
+					// normal, tangent and binormal in eye coordinates 
+					vec3 Ntex = normalize(uNormalMatrix*uNormal.xyz);
+					vec3 Ttex  = normalize(uNormalMatrix*uObjTangent);
+					vec3 Btex = cross(Ntex, Ttex);
+					
+					// light vector in texture space 
+					Ltex.x = dot(Ttex, normalize(Lneon2-pos));
+					Ltex.y = dot(Btex, normalize(Lneon2-pos));
+					Ltex.z = dot(Ntex, normalize(Lneon2-pos));
+					Ltex = normalize(Ltex);
+					
+					// view vector in texture space 
+					Vtex.x = dot(Ttex, normalize( -pos ));
+					Vtex.y = dot(Btex, normalize( -pos ));
+					Vtex.z = dot(Ntex, normalize( -pos ));
+					Vtex = normalize(Vtex);
+				}
+			}
+		}
+	}
+	if(uCflag) gl_Position = uProjectionMatrix * uModelViewMatrixCyl *  aPosition; // the cylinder doesn't ruotate with the object
+	else gl_Position = uProjectionMatrix * uModelViewMatrix * aPosition;	// the position of the object must consider also the rotation (thanks to uModelViewMatrix)
+	vTextCoord = aTextCoord;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+#version 300 es 
+precision mediump float;
+
+//*******************************************************	NEON LIGHT + MATERIAL
+uniform vec4 uAmbientProductNeon, uDiffuseProductNeon, uSpecularProductNeon;
+uniform float uShininess;
+uniform vec4 uEmission;
+
+//*******************************************************	INPUT
+in vec3 vN, vE;
+in vec3 vLneon1, vLneon2, vLneon3;
+in vec3 Ltex, Vtex;
+in vec4 vColor;
+in vec2 vTextCoord;
+
+//*******************************************************	OUTPUT
+out vec4 fColor;
+
+//*******************************************************	FLAGS
+uniform bool uFflag;
+uniform bool uNflag;
+uniform bool uTflag;
+uniform bool uCflag;
+
+//*******************************************************	BUMP MAPPING
+uniform sampler2D uTextureMap;
+
+
+
+void main(){
+	if(!uFflag){	//per-vertex shading
+		fColor = vColor;
+	}
+	else{			//per-fragment shading
+		if(uNflag){
+			if(uCflag){		//in case of the cylinder it is not affected from the light because it's the cylinder the light source: only emission term.
+				fColor = uEmission;
+			}
+			else{				//computing the object color with the turned on neon su using the values of the three lights
+				vec3 H1 = normalize( vLneon1 + vE );
+				vec3 H2 = normalize( vLneon2 + vE );
+				vec3 H3 = normalize( vLneon3 + vE );
+				vec4 ambientNeon = uAmbientProductNeon;
+				float Kd1 = max( dot(vLneon1, vN), 0.0 );
+				float Kd2 = max( dot(vLneon2, vN), 0.0 );
+				float Kd3 = max( dot(vLneon3, vN), 0.0 );
+				vec4 diffuseNeon = Kd1*uDiffuseProductNeon + Kd2*uDiffuseProductNeon + Kd3*uDiffuseProductNeon;
+				float Ks1 = pow( max(dot(vN, H1), 0.0), uShininess );
+				float Ks2 = pow( max(dot(vN, H2), 0.0), uShininess );
+				float Ks3 = pow( max(dot(vN, H3), 0.0), uShininess );
+				vec4 specular1 = Ks1*uSpecularProductNeon;
+				if( dot(vLneon1, vN) < 0.0 ) specular1 = vec4(0.0, 0.0, 0.0, 1.0);
+				vec4 specular2 = Ks2*uSpecularProductNeon;
+				if( dot(vLneon2, vN) < 0.0 ) specular2 = vec4(0.0, 0.0, 0.0, 1.0);
+				vec4 specular3 = Ks3*uSpecularProductNeon;
+				if( dot(vLneon3, vN) < 0.0 ) specular3 = vec4(0.0, 0.0, 0.0, 1.0);
+				vec4 specularNeon = specular1 + specular2 + specular3;
+				fColor = ambientNeon + diffuseNeon + specularNeon;
+
+				if(uTflag){
+					vec4 N = texture(uTextureMap, vTextCoord);
+					vec3 NN =  normalize(2.0*N.xyz-1.0);
+					vec3 LL = normalize(Ltex);
+					float Kd = max(dot(LL, NN), 0.0);
+					vec4 ambient = vec4(0.2, 0.2, 0.2, 0.0);
+					fColor = fColor * (ambient + Kd*uDiffuseProductNeon); 
+				}
+			}
+		}
+	}
+	fColor.a = 1.0;
+}
+</script>
+
+<script src="../Common/initShaders.js"></script>
+<script src="../Common/MVnew.js"></script>
+<script src="Homework1.js"></script>
+
+
+</body>
+</html>

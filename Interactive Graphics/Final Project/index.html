@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <title>Down the Veins</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="./main.css">
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.130.0/build/three.module.js",
+          "gltf-url": "https://unpkg.com/three@0.130.0/examples/jsm/loaders/GLTFLoader.js"
+        }
+      }
+    </script>
+
+    <script type="module" src="./app.js"></script>
+
+    <style>
+      p0 {
+        text-align: center;
+        font-size: 30px;
+        margin-top: 20px;
+        margin-left: 30px;
+        position:absolute;
+      }
+      p1 {
+        text-align: center;
+        font-size: 20px;
+        margin-top: 90px;
+        margin-left: 30px;
+        position:absolute;
+      }
+      p2 {
+        text-align: center;
+        font-size: 20px;
+        margin-top: 150px;
+        margin-left: 30px;
+        position:absolute;
+      }
+      p3 {
+        text-align: center;
+        font-size: 20px;
+        margin-top: 210px;
+        margin-left: 30px;
+        position:absolute;
+      }
+      p4 {
+        text-align: center;
+        font-size: 20px;
+        margin-top: 300px;
+        margin-left: 30px;
+        position:absolute;
+      }
+      p5 {
+        text-align: center;
+        font-size: 20px;
+        margin-top: 360px;
+        margin-left: 30px;
+        position:absolute;
+      }
+      #blocker {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(128,0,0,1);
+			}
+			#instructions {
+				width: 100%;
+				height: 100%;
+
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+
+				text-align: center;
+				font-size: 14px;
+				cursor: pointer;
+			}
+      #pause_menu {
+				width: 100%;
+				height: 100%;
+
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+
+				text-align: center;
+				font-size: 14px;
+				cursor: pointer;
+			}
+      #loading {
+				width: 100%;
+				height: 100%;
+
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+
+				text-align: center;
+				font-size: 40px;
+				cursor: pointer;
+			}
+      #end_page {
+				width: 100%;
+				height: 100%;
+
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+
+				text-align: center;
+				font-size: 30px;
+				cursor: pointer;
+			}
+    </style>
+    </head>
+  <body>
+    <div id="blocker">
+      <div id="instructions">
+        <p>
+          <br/><br/><br/>
+          Move: WASD<br/>
+          Rotation: QE<br/>
+          Change Camera Angle: R<br/>
+          Mask: X<br/>
+          Gel: C<br/>
+          Vaccine: Z<br/>
+          <br/>
+          <br/>
+          <br/>
+          Press ESC to return to the main page.<br/>
+        </p>
+      </div>
+      <div id="pause_menu">
+        <p>
+          PAUSE MENU
+          <br/><br/><br/>
+          Move: WASD<br/>
+          Rotation: QE<br/>
+          Change Camera Angle: R<br/>
+          Mask: X<br/>
+          Gel: C<br/>
+          Vaccine: Z<br/>
+          <br/>
+          <br/>
+          <br/>
+          Press ESC to return to the game.<br/>
+        </p>
+      </div>
+      <div id="loading">
+        <p>
+          LOADING...
+        </p>
+      </div>
+      <div id="end_page"></div>
+    </div>
+    <p0 id="timer"></p0>
+    <p1 id="vaccine"></p1>
+    <p2 id="gel"></p2>
+    <p3 id="mask"></p3>
+    <p4 id="contact"></p4>
+    <p5 id="virus"></p5>
+
+  </body>
+  <script>
+    document.getElementById( 'blocker' ).style.display = 'none';
+    document.getElementById( 'instructions' ).style.display = 'none';
+    document.getElementById( 'pause_menu' ).style.display = 'none';
+    document.getElementById( 'loading' ).style.display = 'none';
+  </script>
+
+</html>

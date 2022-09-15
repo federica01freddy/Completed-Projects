@@ -1,5 +1,5 @@
 # Image Classification with Small Data
-In this homework, you are invited to train image classifiers for a small data set.
+In this homework, you are invited to train image classifiers for a small data set. 
 ## Objectives
 
 - Train your favorite network architecture:

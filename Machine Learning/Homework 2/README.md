@@ -25,3 +25,6 @@ Examples:
 - A choosable hyper-parameter (e.g., momentum parameter of SGD)
 
 At least perform two of these tasks.
+
+## N.B.
+There are other two folders to build the project but here I have uploaded only the folder "small_data".

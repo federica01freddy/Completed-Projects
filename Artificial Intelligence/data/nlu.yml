@@ -1,0 +1,163 @@
+version: "2.0"
+nlu:
+- intent: greet
+  examples: |
+    - ciao
+    - salve
+    - buongiorno
+    - buonasera
+    - buon pomeriggio
+    - buonpomeriggio
+- intent: request_hotel
+  examples: |
+    - sto cercando un hotel
+    - mi serve un albergo a [roma](city)
+    - cerco stanza a [berlino](city)
+    - vorrei un albergo
+    - desidero dormire una notte a [parigi](city)
+    - voglio un albergo
+    - avrei bisosgno di una stanza per due notti
+    - hotel per favore
+    - suite
+    - sto cercando un albergo a [londra](city)
+    - vorrei prenotare una stanza di un hotel
+    - prenotami una stanza
+    - posso prenotare un albergo?
+    - hotel a [madrid](city)
+    - stanza a [barcellona](city)
+  
+- intent: affirm
+  examples: |
+    - sì
+    - sì per favore
+    - sì fumo
+    - si
+    - si per favore
+    - si fumo
+    - certo
+    - ok
+    - perché no
+    - ok grande
+    - Si va bene
+    - ovvio
+    - abbastanza bene
+    - bene
+    - puoi scommetterci
+    - più o meno
+    - tutto bene caro
+- intent: deny
+  examples: |
+    - no
+    - No
+    - assolutamente no
+    - no grazie
+    - non ho fatto nulla
+    - non fumo
+    - no fumatori
+    - nessuno di noi fuma
+    - non fumiamo
+    - No non l'ho fatto
+    - avrebbe potuto essere migliore
+    - Non eccezionale
+- intent: inform
+  examples: |
+    - a [roma](city)
+    - a [tirana](city)
+    - a [berlino](city)
+    - a [andorra la vella](city)
+    - a [vienna](city)
+    - a [bruxelles](city)
+    - a [minsk](city)
+    - a [sarajevo](city)
+    - a [sofia](city)
+    - a [citta del vaticano](city)
+    - a [zagabria](city)
+    - a [copenaghen](city)
+    - a [bratislava](city)
+    - a [lubiana](city)
+    - a [madrid](city)
+    - a [tallin](city)
+    - a [helsinki](city)
+    - a [parigi](city)
+    - a [atene](city)
+    - a [budapest](city)
+    - a [dublino](city)
+    - a [reykjavik](city)
+    - a [riga](city)
+    - a [vaduz](city)
+    - a [vilnius](city)
+    - a [lussemburgo](city)
+    - a [la valletta](city)
+    - a [chisinau](city)
+    - a [monaco](city)
+    - a [podgorica](city)
+    - a [oslo](city)
+    - a [amsterdam](city)
+    - a [varsavia](city)
+    - a [lisbona](city)
+    - a [londra](city)
+    - a [praga](city)
+    - a [skopje](city)
+    - a [bucarest](city)
+    - a [san marino](city)
+    - a [belgrado](city)
+    - a [stoccolma](city)
+    - a [berna](city)
+    - a [kiev](city)
+    - vicino [parigi](city)
+    - [praga](city)
+    - lo cerco a [madrid](city)
+    - a [berlino](city)
+    - il mio giudizio è [positivo](feedback)
+    - il mio feedback è [ottimo](feedback)
+    - è stato [pessimo](feedback)
+    - lo vedo come un [successo](feedback)
+    - sei [tremendo](feedback)
+    - 2 persone
+    - per tre persone
+    - solo una persona
+    - siamo quattro
+    - prenota per tre persone
+    - 2 per favore
+    - vorrei una stanza [semplice](room)
+    - vorrei una [suite](room)
+    - vorremmo una stanza [semplice](room)
+    - vorremmo una [suite](room)
+    - [semplice](room)
+    - [suite](room)
+    - preferirei una stanza [semplice](room)
+    - preferisco una [suite](room)
+- intent: thankyou
+  examples: |
+    - ok grande grazie
+    - grazie
+    - certo grazie
+    - grazie arrivederci
+- intent: chitchat
+  examples: |
+    - stai bene?
+    - bella giornata oggi
+    - chi è il tuo capo?
+    - definiscimi il tuo inventore
+- intent: stop
+  examples: |
+    - Questo non è ciò che voglio
+    - aspetta fermati
+    - Non sei d'aiuto
+    - Questo non è d'aiuto affatto
+    - Dimmi come è il tempo
+    - Questo non funziona
+    - Te l'ho già detto
+    - Non piace questo
+    - Non voglio dirtelo
+    - Non ti interessa
+    - Non è corretto
+    - Non importa
+    - Voglio fare altro
+    - Ho cambiato idea
+- intent: bot_challenge
+  examples: |
+    - sei un bot?
+    - sei un umano?
+    - sto parlando con un umano?
+    - sto parlando con un robot?

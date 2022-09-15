@@ -5,7 +5,7 @@ Visual QA is a semantic task that aims to answer questions based on an image.
 **Dataset**. Visual Q&A v2.0 - Available at https://visualqa.org/download.html. Visual
 Question Answering (VQA) v2.0 is a dataset containing open-ended questions about images.
 These questions require an understanding of vision, language and commonsense knowledge
-to answer. It is the second version of the VQA dataset.
+to answer. It is the second version of the VQA dataset. 
 1. 265,016 images (COCO and abstract scenes)
 2. At least 3 questions (5.4 questions on average) per image
 3. 10 ground truth answers per question

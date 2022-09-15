@@ -2,7 +2,7 @@
 The final project for Interactive Graphics course.
 
 It is a game inspired by the Covid-19 pandemic where the user is a doctor who has to defeat the virus inside human veins
-using masks, vaccines and hand sanitizers. It is a group project.
+using masks, vaccines and hand sanitizers.
 
 ## Authors:
 - Federica Cocci - 1802435

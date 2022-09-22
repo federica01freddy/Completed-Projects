@@ -11,8 +11,7 @@ to answer. It is the second version of the VQA dataset.
 3. 10 ground truth answers per question
 4. 3 plausible (but likely incorrect) answers per question
 
-**Metrics**. You should use the evaluation metric that is described at https://visualqa.
-org/evaluation.html, which is robust to inter-human variability in phrasing the answers:
+**Metrics**. You should use the evaluation metric that is described at https://visualqa.org/evaluation.html, which is robust to inter-human variability in phrasing the answers:
 
   Acc(*ans*) = min {(number of humans that said *ans* / 3), 1}
 

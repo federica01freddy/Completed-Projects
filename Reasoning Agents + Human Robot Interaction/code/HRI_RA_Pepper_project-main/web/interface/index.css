@@ -1,0 +1,141 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Trebuchet MS", sans-serif;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+.scene-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.animation-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+.welcome-text {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-align: center;
+    margin: 0 50px;
+}
+
+.cursor {
+    width: 20px;
+    height: 5px;
+    background-color: #000;
+    position: relative;
+    top: 0.4em;
+    left: 0.4em;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.button-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin: 40px 0;
+    height: 100px;
+}
+
+button {
+    min-width: 120px;
+    padding: 10px 20px;
+    border: 6px solid #000;;
+    font-size: 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 5px 5px 0 #000;
+}
+
+button:active {
+    transform: translate(5px, 5px);
+    transition: 0.1s;
+    box-shadow: none;
+}
+
+.button-div {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.below-button {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 1.2em;
+    position: absolute;
+    color: gray;
+}
+/*
+.button-green {
+    background-color: #6ef86e;
+    color: #000;
+}
+
+.button-red {
+    background-color: #ffd54a;
+    color: #000;
+}
+*/
+
+.buttons-out {
+    animation: buttonsOut;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+}
+
+.buttons-in {
+    animation: buttonsIn;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in;
+}
+
+@keyframes buttonsOut {
+    0% {
+        opacity: 100%;
+    }
+
+    100% {
+        opacity: 0%;
+    }
+}
+
+@keyframes buttonsIn {
+    0% {
+        opacity: 0%;
+    }
+
+    100% {
+        opacity: 100%;
+    }
+}
+
+input {
+    padding: 5px;
+    height: 50px;
+    width: 200px;
+    font-size: 2em;
+    border-radius: 5px;
+    border: 2px solid grey;
+}

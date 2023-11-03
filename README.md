@@ -26,9 +26,9 @@ Federica Cocci, Michela Proietti, Sofia Santilli
 
 ## Interactive Graphics
 ### Homework 1
-Implementation of basic tasks in computer graphics, such as rendering a scene, shadowing, variable lighting INSERIRE IL PDF
+Implementation of basic tasks in computer graphics, such as rendering a scene, shadowing, variable lighting.
 ### Homework 2
-Implementation of animations with WebGL CAMBIARE NOME AL PDF TASK
+Implementation of animations with WebGL.
 ### Project
 We developed the game "Down the Veins!". The name is inspired by the situation about the Covid-19 pandemic and the game wants to reproduce the inside of the human veins when the vaccine is inoculated: we imagine a micro-doctor who wanders around veins to pick up masks, hand sanitizers and vaccine doses to fight the enemy, the SARS-CoV-2 virus.
 
@@ -40,7 +40,6 @@ To play the demo of the game, click on the below link:\
 #### Collaborators
 Federica Cocci, Alberto Coluzzi
 ## Machine Learning
-TOGLIERE LA CARTELLA DI REINFORCEMENT LEARNING
 ### Homework 1
 This homework has been assigned during the seminar ”Bug Finding in Compiler Toolchains”. A compiler toolchain is made of compiler and debugger and other modules; inside it, there can be bugs in different points of the chain. The given dataset is a mapping between Assembly and C instructions and the task consists in looking either for a correspondence or for a bug. 
 #### Implementation

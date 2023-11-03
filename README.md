@@ -33,6 +33,12 @@ Federica Cocci, Alberto Coluzzi
 Caterina Borzillo, Federica Cocci, Damiano Gasperini, Matteo Germano
 ## Narrative Understanding and Storytelling (a NLP course)
 ## Neural Networks
+"Learning strides in convolutional neural network"[^2]
+"Lightweight convolutional neural networks by hypercomplex parametrization"[^3]
+
+
+[^2]: Rachid Riad, Olivier Teboul, David Grangier, Neil Zeghidour, Learning strides in convolutional neural network, https://arxiv.org/pdf/2202.01653.pdf 
+[^3]: Eleonora Grassucci, Aston Zhang, Danilo Comminiello, Lightweight convolutional neural networks by hypercomplex parametrization, https://arxiv.org/pdf/2110.04176.pdf
 ### Collaborators
 Federica Cocci, Sofia Santilli
 ## Vision and Perception

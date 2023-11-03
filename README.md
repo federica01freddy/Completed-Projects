@@ -25,23 +25,56 @@ The developed architectures are:
 Federica Cocci, Michela Proietti, Sofia Santilli
 
 ## Interactive Graphics
-### Collaborators
+### Homework 1
+Implementation of basic tasks in computer graphics, such as rendering a scene, shadowing, variable lighting INSERIRE IL PDF
+### Homework 2
+Implementation of animations with WebGL CAMBIARE NOME AL PDF TASK
+### Project
+We developed the game "Down the Veins!". The name is inspired by the situation about the Covid-19 pandemic and the game wants to reproduce the inside of the human veins when the vaccine is inoculated: we imagine a micro-doctor who wanders around veins to pick up masks, hand sanitizers and vaccine doses to fight the enemy, the SARS-CoV-2 virus.
+
+We used _JavaScript_, _HTML_ and _WebGl_; models of the objects were created in _Blender_.
+
+To play the demo of the game, click on the below link:\
+[Down the Veins!](https://sapienzainteractivegraphicscourse.github.io/final-project-coco-team/)
+
+#### Collaborators
 Federica Cocci, Alberto Coluzzi
 ## Machine Learning
+TOGLIERE LA CARTELLA DI REINFORCEMENT LEARNING
+### Homework 1
+This homework has been assigned during the seminar ”Bug Finding in Compiler Toolchains”. A compiler toolchain is made of compiler and debugger and other modules; inside it, there can be bugs in different points of the chain. The given dataset is a mapping between Assembly and C instructions and the task consists in looking either for a correspondence or for a bug. 
+#### Implementation
+In order to resolve the task, I used several Machine Learning approaches to find the best one:
+*  _Bernoulli Naive Bayes classifier_
+*  _Multinomial Naive Bayes classifier_
+*  _Gaussian Naive Bayes classifier_
+* _pruned decision tree_
+* _not pruned decision tree_
+* _random forest_
+
+### Homework 2
+Generally speaking the problem I faced up in this homework is a classification problem having a small dataset. Using pre-trained networks and, using as basic architecture the Residual Network (ResNet), I was asked to play with hyperparameters, customizing a network architecture or changing the optimizer.
 ## Medical Robotics
+In our project, we were asked to implement impedance control for a manipulator with the future goal of remotely performing a commanded tele-echographic examination. The simulated manipulator is equipped with an ultra-sound probe which will be in contact with an abdomen phantom. Starting from an initial position above the phantom, the probe approaches the abdomen perpendicularly and then slides on it, keeping low contact forces.
+
+The final version of the project is based on _ROS_ and _ViSP_ library which allows us to control the Panda robot from Franka Emika. The manipulator is simulated in a _CoppeliaSim_ scene.
 ### Collaborators
 Caterina Borzillo, Federica Cocci, Damiano Gasperini, Matteo Germano
 ## Narrative Understanding and Storytelling (a NLP course)
+This miniproject aims at the generation of titles giving in input the plot of a TV series episode.
+I used the pre-trained model _distilGPT2_ for title generation and then compare the obtained results with the use of the pre-trained model _T5_ focusing on the metrics to make some comparisons. As metrics for the evaluation I have implemented the _Catchiness Score_ and also the _Cosine Similarity_ in order to measure the semantic similarity. The dataset is custom-made, using a scraper that I have implemented which takes the data directly from Wikipedia.
 ## Neural Networks
-"Learning strides in convolutional neural network"[^2]
-"Lightweight convolutional neural networks by hypercomplex parametrization"[^3]
-
+We reimplemented the approach proposed by the paper "Learning strides in convolutional neural network"[^2]. We used a pooling layer in the place of strides in the convolutional layers. The pooling layer works in the frequency domain and we tried two different pooling layer to understand the best one: the first one is the fixed spectral pooling and the second one is the learnable spectral pooling. We also substituted the classical Conv2d layers in the network with Parametrized Hypercomplex Convolutional layers (from "Lightweight convolutional neural networks by hypercomplex parametrization"[^3] paper), which allow to reduce the overall number of parameters by a factor of N.
 
 [^2]: Rachid Riad, Olivier Teboul, David Grangier, Neil Zeghidour, Learning strides in convolutional neural network, https://arxiv.org/pdf/2202.01653.pdf 
 [^3]: Eleonora Grassucci, Aston Zhang, Danilo Comminiello, Lightweight convolutional neural networks by hypercomplex parametrization, https://arxiv.org/pdf/2110.04176.pdf
 ### Collaborators
 Federica Cocci, Sofia Santilli
 ## Vision and Perception
+We implemented the paper "Learning Rich Features for Image Manipulation Detection"[^4].
+There are 2 goals: the former is a binary classification (is the image manipulated?) and the latter is finding where the image is manipulated.
+
+[^4]: Peng Zhou, Xintong Han, Vlad I. Morariu, Larry S. Davis, Learning Rich Features for Image Manipulation Detection, https://arxiv.org/abs/1805.04953
 ### Collaborators
 Caterina Borzillo, Federica Cocci, Alberto Coluzzi
 ## Reasoning Agents + Human Robot Interaction
